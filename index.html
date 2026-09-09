@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>임별 과거형 부정문 기초 다지기 · 영핏 지나티처</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    background: #f0f4f4; color: #2B3A3D; min-height: 100vh;
+    display: flex; justify-content: center; padding: 20px 14px;
+    word-break: keep-all; overflow-wrap: break-word;
+  }
+  .wrap { width: 100%; max-width: 560px; }
+  .card { background: #fff; border-radius: 16px; padding: 26px 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 14px; }
+  h1 { font-size: 1.25rem; color: #2F7C83; margin-bottom: 6px; line-height: 1.5; }
+  .sub { font-size: 0.9rem; color: #6B7B7E; margin-bottom: 18px; line-height: 1.85; }
+
+  /* ── 영핏 지나티처 로고 ── */
+  .logo { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+  .logo svg { flex: none; display: block; }
+  .logo .wordmark { line-height: 1.25; }
+  .logo .wordmark .n { font-size: 0.88rem; font-weight: bold; color: #235E64; letter-spacing: -0.2px; }
+  .logo .wordmark .t { display: block; font-size: 0.68rem; color: #8fa5a1; letter-spacing: 0.5px; }
+
+  /* 영어 문장은 띄어쓰기 단위로만 줄바꿈 */
+  .en, .choice, .ord-tile { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+
+  input[type=text] { width: 100%; padding: 13px; font-size: 1.05rem; border: 1.5px solid #DBE4E5; border-radius: 10px; font-family: inherit; }
+  input[type=text]:focus { outline: none; border-color: #2F7C83; }
+  .lbl { display: block; font-size: 0.85rem; font-weight: bold; color: #235E64; margin-bottom: 7px; }
+  .btn { display: block; width: 100%; margin-top: 12px; padding: 14px; font-size: 1.03rem; font-weight: bold; color: #fff; background: #2F7C83; border: none; border-radius: 10px; cursor: pointer; text-align: left; line-height: 1.55; font-family: inherit; }
+  .btn:disabled { background: #b8c4c2; cursor: default; }
+  .btn.sub-btn { background: #8fa5a1; }
+  .btn.center { text-align: center; }
+  .btn.done { background: #cfe0dc; color: #4d6a64; }
+  .btn.clinic { background: #b5762f; }
+  .btn .cnt { display: inline-block; font-size: 0.8rem; font-weight: normal; opacity: 0.92; margin-left: 4px; }
+
+  .progress { font-size: 0.85rem; color: #6B7B7E; margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .srctag { display: inline-block; font-size: 0.75rem; color: #235E64; background: #E6F1F1; border-radius: 6px; padding: 3px 9px; margin-bottom: 10px; line-height: 1.5; }
+  .bar { height: 6px; background: #e3ecea; border-radius: 3px; margin-bottom: 14px; overflow: hidden; }
+  .bar > div { height: 100%; background: #2F7C83; border-radius: 3px; width: 0; transition: width .25s; }
+
+  .cardbox { background: #f2faf7; border: 1px solid #bfe0d6; border-left: 5px solid #2F7C83; border-radius: 12px; padding: 16px; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.95; }
+  .cardbox h2 { font-size: 1.05rem; color: #235E64; margin-bottom: 10px; line-height: 1.5; }
+  .cardbox .ex { display: block; background: #fff; border-left: 3px solid #9dcfc3; border-radius: 6px; padding: 9px 11px; margin: 9px 0; font-size: 0.93rem; line-height: 1.95; }
+  .cardbox .my { display: block; background: #FFF6E8; border-left: 3px solid #e5cf8a; border-radius: 6px; padding: 9px 11px; margin: 9px 0; font-size: 0.93rem; line-height: 1.95; color: #4a4023; }
+  .cardbox .my b { color: #8a6400; }
+  .cardbox b { color: #235E64; }
+
+  details.tip { background: #f2faf7; border: 1px solid #bfe0d6; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.9rem; line-height: 1.9; }
+  details.tip summary { cursor: pointer; font-weight: bold; color: #235E64; font-size: 0.85rem; }
+  details.tip .inner { margin-top: 8px; }
+  details.tip b { color: #235E64; }
+  details.tip .ex { display: block; background: #fff; border-left: 3px solid #9dcfc3; border-radius: 6px; padding: 9px 11px; margin: 9px 0; }
+  details.tip .my { display: block; background: #FFF6E8; border-left: 3px solid #e5cf8a; border-radius: 6px; padding: 9px 11px; margin: 9px 0; color: #4a4023; }
+  details.tip .my b { color: #8a6400; }
+
+  .qtext { font-size: 1.06rem; line-height: 1.95; margin-bottom: 16px; }
+  .qtext .ko { display: block; font-size: 0.9em; color: #6B7B7E; margin-top: 3px; }
+  .choice { display: block; width: 100%; text-align: left; padding: 13px 14px; margin-bottom: 9px; font-size: 1.02rem; background: #f6f9f8; border: 1.5px solid #DBE4E5; border-radius: 10px; cursor: pointer; line-height: 1.6; font-family: inherit; color: #2B3A3D; }
+  .choice:active { background: #E6F1F1; }
+  .num { color: #2F7C83; font-weight: bold; margin-right: 7px; }
+  .keyhint { font-size: 0.78rem; color: #9aa8a5; text-align: center; margin-top: 10px; }
+
+  .score-big { font-size: 2rem; font-weight: bold; color: #2F7C83; text-align: center; margin: 10px 0; }
+  .exp { background: #f6f9f8; border-left: 4px solid #2F7C83; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; font-size: 0.93rem; line-height: 1.9; }
+  .exp.wrong { border-left-color: #b5762f; background: #FFF6E8; }
+  .exp b { color: #235E64; }
+  .exp.wrong .exp-head b { color: #a2631f; }
+  .exp .ans-line { display: block; font-size: 0.85rem; color: #7a6a55; margin: 4px 0 6px; }
+
+  .whybox { background: #FFF6E8; border: 1px solid #e8d6b3; border-left: 5px solid #b5762f; border-radius: 12px; padding: 16px; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.95; }
+  .whybox h2 { font-size: 1.02rem; color: #a2631f; margin-bottom: 10px; line-height: 1.5; }
+  .whybox .row { display: block; background: #fff; border-radius: 8px; padding: 9px 11px; margin: 8px 0; font-size: 0.93rem; line-height: 1.85; }
+  .whybox .row .k { color: #8a6400; font-weight: bold; }
+  .whybox b { color: #a2631f; }
+  .rulebox { background: #f2faf7; border: 1px solid #bfe0d6; border-left: 5px solid #2F7C83; border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; font-size: 0.94rem; line-height: 1.95; }
+  .rulebox .h { font-weight: bold; color: #235E64; display: block; margin-bottom: 5px; }
+  .rulebox b { color: #235E64; }
+
+  .ord-slot { min-height: 56px; background: #E6F1F1; border: 1.5px dashed #9dbdbd; border-radius: 10px; padding: 10px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+  .ord-ph { font-size: 0.85rem; color: #7f9a9a; }
+  .ord-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .ord-tile { font-size: 1.02rem; padding: 10px 13px; background: #f6f9f8; border: 1.5px solid #DBE4E5; border-radius: 9px; cursor: pointer; font-family: inherit; color: #2B3A3D; line-height: 1.35; }
+  .ord-tile.picked { background: #2F7C83; color: #fff; border-color: #2F7C83; }
+  .ord-help { font-size: 0.82rem; color: #6B7B7E; line-height: 1.75; margin-bottom: 10px; }
+
+  .saybar { position: fixed; left: 0; right: 0; bottom: 0; background: #235E64; color: #fff; padding: 13px 16px; display: flex; align-items: center; gap: 11px; justify-content: center; z-index: 60; box-shadow: 0 -2px 14px rgba(0,0,0,0.2); }
+  .saybar .ico { flex: none; width: 24px; height: 24px; }
+  .saybar .lbl { display: block; font-size: 0.75rem; opacity: 0.85; letter-spacing: 0.3px; }
+  .saybar .txt { display: block; font-size: 1.02rem; font-weight: bold; line-height: 1.5; word-break: keep-all; overflow-wrap: normal; }
+  .soundrow { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; padding: 12px 13px; background: #E6F1F1; border-radius: 10px; }
+  .soundrow input { width: 19px; height: 19px; margin-top: 2px; flex: none; accent-color: #2F7C83; }
+  .soundrow label { font-size: 0.88rem; font-weight: bold; color: #235E64; cursor: pointer; line-height: 1.6; }
+  .soundrow label .note { display: block; font-size: 0.8rem; color: #6B7B7E; font-weight: normal; margin-top: 2px; }
+  .footer { text-align: center; font-size: 0.78rem; color: #9aa8a5; padding: 8px 0 26px; line-height: 1.8; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ══════ 시작 (이름 + 영역 선택) ══════ -->
+  <div class="card" id="start-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="38" height="38" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span><span class="t">영어를 핏하다</span></div>
+    </div>
+    <h1>별이의 과거형 부정문 기초 다지기<br>· didn't 네 칸 공식 ·</h1>
+    <p class="sub">개념 카드 5장 + 문제 20문항 (5영역)<br>
+    지난 <b>70문제 문법 프린트</b>에서 별이가 헷갈렸던 곳을 <b>딱 5가지 원인</b>으로 모았어요.<br>
+    낱개로 외우지 않아도 돼요. 이 5개만 잡으면 한꺼번에 정리돼요!<br>
+    <b>개념 카드 1장 → 그 개념 문제 4개</b>, 이렇게 5번 반복해요.<br>같은 규칙을 <b>여러 번</b> 만나도록 만들었어요. 반복이 힘이에요!<br>
+    틀린 문제가 있으면 <b>왜 틀렸는지 설명 → 오답 클리닉 문제</b>가 이어서 나와요.<br>
+    답을 고르면 <b>정답 문장을 영어 소리로 들려줘요.</b> 소리 내어 따라 말해 보세요!<br>
+    한 영역이 끝나면 결과를 복사해서 지나티처에게 카톡으로 보내주세요.<br>
+    푼 기록은 자동 저장되니 중간에 꺼져도 이어서 할 수 있어요.</p>
+    <label class="lbl" for="name-input">이름</label>
+    <input type="text" id="name-input" placeholder="이름을 입력하세요" maxlength="20" autocomplete="off">
+    <div class="soundrow">
+      <input type="checkbox" id="sound-on" checked>
+      <label for="sound-on">정답 영어를 소리로 듣기<span class="note">답을 고르면 다음 문제로 넘어가기 전에 정답 문장을 원어민 소리로 들려줘요.</span></label>
+    </div>
+    <button class="btn sub-btn center" id="sound-test" style="margin-top:9px">소리 테스트 — 눌러서 영어가 들리는지 확인해요</button>
+    <p class="keyhint" id="sound-msg" style="margin-top:9px; min-height:18px"></p>
+    <p class="keyhint" style="margin-top:4px; line-height:1.7; color:#b5762f">
+      카톡에서 바로 열면 소리가 안 날 수 있어요.<br>
+      소리가 안 들리면 화면 <b>오른쪽 위 점 세 개</b>를 눌러<br>
+      <b>‘다른 브라우저로 열기’</b>(크롬 · 사파리)를 선택해 주세요.
+    </p>
+    <p class="sub" id="sec-pick-hint" style="margin:18px 0 -2px">아래에서 시작할 영역을 골라 주세요 (1영역부터 순서대로 푸는 걸 추천해요)</p>
+    <button class="btn sec-start" data-sec="0" disabled>1영역 시작 · didn't 뒤에는 원래 모양 <span class="cnt">카드 1장 · 4문항</span></button>
+    <button class="btn sec-start" data-sec="1" disabled>2영역 시작 · wasn't 길과 didn't 길 <span class="cnt">카드 1장 · 4문항</span></button>
+    <button class="btn sec-start" data-sec="2" disabled>3영역 시작 · didn't 인가 don't 인가 <span class="cnt">카드 1장 · 4문항</span></button>
+    <button class="btn sec-start" data-sec="3" disabled>4영역 시작 · not 의 자리 <span class="cnt">카드 1장 · 4문항</span></button>
+    <button class="btn sec-start" data-sec="4" disabled>5영역 시작 · 부정문 조립 · 네 칸 공식 <span class="cnt">카드 1장 · 4문항</span></button>
+    <p class="keyhint" id="sec-done-note" style="margin-top:12px"></p>
+  </div>
+
+  <!-- ══════ 이어하기 ══════ -->
+  <div class="card hidden" id="resume-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="38" height="38" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span><span class="t">영어를 핏하다</span></div>
+    </div>
+    <h1>이어서 풀 수 있어요</h1>
+    <p class="sub" id="resume-info"></p>
+    <button class="btn center" id="resume-btn">이어서 하기</button>
+    <button class="btn sub-btn center" id="restart-btn">처음부터 다시 하기</button>
+  </div>
+
+  <!-- ══════ 개념 카드 ══════ -->
+  <div class="card hidden" id="cards-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <div class="progress"><span id="card-num"></span><span id="card-sec"></span></div>
+    <div class="bar"><div id="card-bar"></div></div>
+    <div class="cardbox" id="cardbox"></div>
+    <button class="btn center" id="card-next">개념 확인 끝! 문제 2개 풀러 가기</button>
+    <button class="btn sub-btn center" id="card-skip">카드 건너뛰고 바로 문제 풀기</button>
+  </div>
+
+  <!-- ══════ 문제 ══════ -->
+  <div class="card hidden" id="quiz-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <div class="progress"><span id="prog-num"></span><span id="prog-pct"></span></div>
+    <div class="bar"><div id="bar-fill"></div></div>
+    <span class="srctag" id="srctag"></span>
+    <details class="tip" id="tipbox"><summary>개념 카드 다시 보기 (헷갈리면 눌러요)</summary><div class="inner" id="tipinner"></div></details>
+    <div class="qtext" id="qtext"></div>
+    <div id="choices"></div>
+    <p class="keyhint" id="keyhint">숫자키 1~4로도 선택할 수 있어요</p>
+  </div>
+
+  <!-- ══════ 영역 결과 ══════ -->
+  <div class="card hidden" id="sec-result-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <h1 id="sec-result-title"></h1>
+    <div class="score-big" id="sec-score"></div>
+    <p class="sub" id="sec-wrong" style="text-align:center"></p>
+    <button class="btn center" id="sec-copy-btn"></button>
+    <button class="btn clinic center hidden" id="clinic-start-btn"></button>
+    <button class="btn center" id="next-sec-btn" style="background:#38699e"></button>
+    <button class="btn sub-btn center" id="pick-sec-btn">영역 선택으로 돌아가기</button>
+    <div id="total-block" class="hidden" style="margin-top:22px; border-top:2px dashed #DBE4E5; padding-top:18px">
+      <p class="sub" style="text-align:center; margin-bottom:4px">전체 최종 결과</p>
+      <div class="score-big" id="total-score"></div>
+      <p class="sub" id="total-detail" style="text-align:center"></p>
+      <button class="btn center" id="total-copy-btn">전체 결과 한 번에 복사 (카톡용)</button>
+    </div>
+    <div style="margin-top:20px">
+      <p class="sub" style="margin-bottom:10px">이 영역 해설 — 맞은 문제도 한 번씩 읽어보세요!</p>
+      <div id="sec-explanations"></div>
+    </div>
+  </div>
+
+  <!-- ══════ 오답 클리닉 · 왜 틀렸을까 ══════ -->
+  <div class="card hidden" id="clinic-why-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <div class="progress"><span id="why-num"></span><span>오답 클리닉</span></div>
+    <div class="bar"><div id="why-bar"></div></div>
+    <div class="whybox" id="whybox"></div>
+    <div class="rulebox" id="rulebox"></div>
+    <button class="btn clinic center" id="why-next">이해했어요! 비슷한 문제 풀어보기</button>
+  </div>
+
+  <!-- ══════ 오답 클리닉 · 문제 ══════ -->
+  <div class="card hidden" id="clinic-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <div class="progress"><span id="cq-num"></span><span>오답 클리닉</span></div>
+    <div class="bar"><div id="cq-bar"></div></div>
+    <span class="srctag" id="cq-src"></span>
+    <div class="qtext" id="cq-text"></div>
+    <div id="cq-choices"></div>
+    <p class="keyhint" id="cq-keyhint">숫자키 1~4로도 선택할 수 있어요</p>
+  </div>
+
+  <!-- ══════ 오답 클리닉 결과 ══════ -->
+  <div class="card hidden" id="clinic-result-card">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="영핏">
+        <rect width="40" height="40" rx="11" fill="#2F7C83"/>
+        <rect x="8.5" y="22" width="5.6" height="9.5" rx="2.2" fill="#FFF6E8"/>
+        <rect x="17.2" y="17" width="5.6" height="14.5" rx="2.2" fill="#FFF6E8" opacity="0.82"/>
+        <rect x="25.9" y="10.5" width="5.6" height="21" rx="2.2" fill="#FFF6E8"/>
+      </svg>
+      <div class="wordmark"><span class="n">영핏 지나티처</span></div>
+    </div>
+    <h1 id="cr-title">오답 클리닉 완료!</h1>
+    <div class="score-big" id="cr-score"></div>
+    <p class="sub" id="cr-msg" style="text-align:center"></p>
+    <button class="btn center" id="cr-copy-btn">클리닉 결과 복사 (카톡용)</button>
+    <button class="btn center" id="cr-next-btn" style="background:#38699e"></button>
+    <button class="btn sub-btn center" id="cr-pick-btn">영역 선택으로 돌아가기</button>
+    <div style="margin-top:20px">
+      <p class="sub" style="margin-bottom:10px">클리닉 해설</p>
+      <div id="cr-explanations"></div>
+    </div>
+  </div>
+
+  <div class="saybar hidden" id="saybar">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#fff"></polygon>
+      <path d="M15.5 8.6a4.6 4.6 0 0 1 0 6.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M18.6 5.6a9 9 0 0 1 0 12.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <div><span class="lbl">정답 듣기</span><span class="txt" id="saytext"></span></div>
+  </div>
+
+  <div class="footer">
+    영핏 지나티처 · 영어를 핏하다<br>
+    누가 · didn't · 원래 모양 · 나머지. 별이 화이팅!
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ══════════ 결과 기록 (영핏 공통 전송코드 v1 — 변경 금지) ══════════ */
+var ENGFIT_SUBMIT_URL = "https://script.google.com/macros/s/AKfycbz5IC3cEtaBGW10qZhrjwtjdtGugmcmYb4ZTHS4k-1LOqTRYzW-LfoAPyFB_ShjAqNp/exec";
+async function engfitSubmit(r) {
+  var body = JSON.stringify(r);
+  try {
+    var res = await fetch(ENGFIT_SUBMIT_URL, { method: "POST", body: body });
+    var j = await res.json();
+    return j.ok === true;
+  } catch (e) {
+    try {
+      await fetch(ENGFIT_SUBMIT_URL, { method: "POST", mode: "no-cors", body: body });
+      return true;
+    } catch (e2) { return false; }
+  }
+}
+
+/* ══════════ 개념 카드 5장 (영역당 1장) ══════════ */
+var TIPS = {};
+
+var A1 = "카드 1. didn't 뒤에는 무조건 원래 모양!";
+var B1 = "카드 2. wasn't 로 할까, didn't 로 할까?";
+var C1 = "카드 3. 어제 일이면 didn't, 늘 하는 일이면 don't";
+var D1 = "카드 4. not 은 아무 데나 넣으면 안 돼요";
+var E1 = "카드 5. 부정문 조립 순서 · 네 칸 공식";
+
+TIPS[A1] =
+"과거의 일을 <b>아니라고</b> 말할 때는 <b>didn't</b> 를 써요. 그리고 아주 중요한 규칙이 하나 있어요." +
+"<span class='ex'><b>didn't 뒤에는 동사의 원래 모양</b>이 와요.<br>" +
+"과거 모양을 또 쓰면 안 돼요!</span>" +
+"<span class='ex'>왜 그럴까요?<br>" +
+"<b>did</b> 안에 이미 <b>과거</b>가 들어 있어요.<br>" +
+"과거를 두 번 말할 필요가 없죠!<br><br>" +
+"I <b>ate</b> dinner. (먹었다 — ate 가 과거)<br>" +
+"I <b>didn't</b> <b>eat</b> dinner. (안 먹었다 — did 가 과거)</span>" +
+"<span class='ex'>틀린 것 → 바른 것<br>" +
+"did not <s>ate</s> → did not <b>eat</b><br>" +
+"didn't <s>watched</s> → didn't <b>watch</b><br>" +
+"didn't <s>knew</s> → didn't <b>know</b><br>" +
+"didn't <s>wantted</s> → didn't <b>want</b><br>" +
+"didn't <s>went</s> → didn't <b>go</b></span>" +
+"<span class='my'>별이가 39번부터 59번까지 <b>didn't + 원래 모양</b>을 아주 잘 썼어요!<br>" +
+"didn't wash · didn't drink · didn't wear · didn't take · didn't know · didn't make — 전부 정확했답니다.<br><br>" +
+"앞쪽 1번 · 4번 · 21번 · 22번에서만 과거 모양을 한 번 더 썼어요.<br>" +
+"이제 규칙을 알았으니 앞쪽도 다 맞힐 수 있어요!<br><br>" +
+"기억법: <b>did 가 과거를 맡았으니, 뒤 동사는 쉬어요!</b></span>";
+
+TIPS[B1] =
+"부정문을 만들 때 <b>두 가지 길</b>이 있어요. 어느 길로 갈지는 <b>동사</b>가 정해요." +
+"<span class='ex'><b>길 1 — be동사 길</b> (was · were)<br>" +
+"be동사가 있을 때만 그 뒤에 <b>not</b> 을 붙여요.<br>" +
+"She <b>was</b> happy. → She <b>wasn't</b> happy.<br>" +
+"They <b>were</b> tired. → They <b>weren't</b> tired.</span>" +
+"<span class='ex'><b>길 2 — didn't 길</b> (동작 말이 있을 때)<br>" +
+"drink · like · watch · read · eat 같은 <b>동작 말</b>은<br>" +
+"앞에 <b>didn't</b> 를 붙여요.<br>" +
+"She <b>drank</b> milk. → She <b>didn't drink</b> milk.<br>" +
+"We <b>liked</b> it. → We <b>didn't like</b> it.</span>" +
+"<span class='ex'>절대 섞으면 안 돼요!<br>" +
+"<s>wasn't drink</s> ✗ — wasn't 와 drink 를 같이 못 써요<br>" +
+"<s>were not like</s> ✗ — were not 과 like 를 같이 못 써요</span>" +
+"<span class='my'>별이가 3번에서 <b>didn't like</b> 를 정확하게 골랐어요! 길을 아는 거예요.<br><br>" +
+"2번에서 <b>wasn't drink</b> 를 골랐죠? drink 는 동작 말이라 <b>didn't drink</b> 랍니다.<br><br>" +
+"확인법: <b>뒤에 동작 말이 보이면 → didn't 길!</b></span>";
+
+TIPS[C1] =
+"<b>didn't</b> 와 <b>don't</b> 는 모양이 비슷하지만 <b>때</b>가 달라요." +
+"<span class='ex'><b>didn't</b> — 지나간 일 (과거)<br>" +
+"함께 오는 말: <b>yesterday · last night · last Sunday · last week · last year</b><br>" +
+"I <b>didn't</b> meet Clara <b>last Sunday</b>.</span>" +
+"<span class='ex'><b>don't · doesn't</b> — 늘 그런 일 (현재)<br>" +
+"함께 오는 말: <b>every day · usually · always · on Sunday</b><br>" +
+"You <b>don't</b> get up early <b>on Sunday</b>. (일요일마다 늘)<br>" +
+"My dad <b>doesn't</b> work <b>today</b>.</span>" +
+"<span class='ex'>우리말 끝을 잘 들어요!<br>" +
+"<b>~하지 않았다</b> (과거) → didn't<br>" +
+"<b>~하지 않는다</b> (현재) → don't · doesn't</span>" +
+"<span class='my'>별이가 8번 <b>didn't</b>, 9번 <b>didn't</b> 를 정확하게 골랐어요!<br><br>" +
+"7번은 <b>yesterday</b> 가 있어서 didn't 예요.<br>" +
+"10번은 우리말이 '일어나지 <b>않는다</b>' 라서 don't 예요.<br><br>" +
+"요령: <b>문장 끝의 시간 표시부터 찾아요!</b><br>" +
+"yesterday 가 보이면 고민 없이 didn't 랍니다.</span>";
+
+TIPS[D1] =
+"<b>not</b> 은 혼자 아무 데나 들어갈 수 없어요. 자리가 정해져 있답니다." +
+"<span class='ex'>동작 말 앞에 not 만 넣으면 안 돼요!<br>" +
+"<s>They read not comic books.</s> ✗<br>" +
+"<s>We not went camping.</s> ✗<br>" +
+"<s>My sister made not the bed.</s> ✗<br>" +
+"<s>She does not take the photo.</s> ✗ (과거인데 does)</span>" +
+"<span class='ex'>바르게 고치면 이렇게 돼요.<br>" +
+"They <b>didn't read</b> comic books.<br>" +
+"We <b>didn't go</b> camping.<br>" +
+"My sister <b>didn't make</b> the bed.<br>" +
+"She <b>didn't take</b> the photo.</span>" +
+"<span class='ex'>not 은 반드시 <b>did</b> 와 짝을 이뤄요.<br>" +
+"<b>did + not</b> = <b>didn't</b><br>" +
+"그리고 그 뒤에 <b>동사의 원래 모양</b>이 와요.</span>" +
+"<span class='my'>21번부터 24번까지 고쳐 쓰는 문제가 어려웠죠?<br>" +
+"별이가 <b>want · know · go · make</b> 라고 원래 모양을 정확하게 써냈어요! 잘했어요.<br><br>" +
+"기억법: <b>not 은 did 없이는 못 서요!</b></span>";
+
+TIPS[E1] =
+"부정문은 <b>네 칸 공식</b>으로 만들면 절대 안 틀려요." +
+"<span class='ex'><b>누가 → didn't → 원래 모양 → 나머지</b><br><br>" +
+"I / didn't / eat / dinner.<br>" +
+"He / didn't / get up / early.<br>" +
+"They / didn't / watch / the movie.<br>" +
+"Ben / didn't / take / a bus.<br>" +
+"She / didn't / do / the dishes.</span>" +
+"<span class='ex'>순서를 바꾸면 안 돼요!<br>" +
+"didn't 는 <b>언제나 두 번째 칸</b>이에요.<br>" +
+"주어가 I 든 She 든 They 든 <b>모두 didn't</b> 예요.<br>" +
+"didn'ts · didn'ted 같은 건 없어요!</span>" +
+"<span class='ex'>더 긴 문장도 똑같아요.<br>" +
+"My sister / didn't / make / the bed.<br>" +
+"We / didn't / go / camping.<br>" +
+"He / didn't / know / the answer.</span>" +
+"<span class='my'>별이가 51번부터 59번까지 배열 문제를 정말 잘했어요!<br>" +
+"I didn't eat dinner. · He didn't get up early. · They didn't watch the movie.<br>" +
+"She didn't do the dishes. · Ben didn't take a bus. · He didn't know the answer.<br>" +
+"My sister didn't make the bed. · We didn't go camping. · I didn't buy the book.<br><br>" +
+"아홉 문장을 <b>전부</b> 맞혔어요. 네 칸 공식을 이미 몸으로 알고 있답니다!<br><br>" +
+"64번부터는 아직 안 풀었죠? 이 링크로 연습한 다음에 풀면 훨씬 쉬울 거예요.</span>";
+
+/* ══════════ 문제 20문항 (5영역 · 영역당 4문항) ══════════ */
+var ALL = [
+/* ───────── 1영역 · didn't + 원형 (1~4) ───────── */
+{"src":A1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>I ( ) dinner last night.</b><span class='ko'>(나는 어젯밤에 저녁을 먹지 않았다.)</span>","choices":["did not eat","did not ate","did not eats","not ate"],"answer":"did not eat","exp":"정답은 <b class='en'>did not eat</b>!<br>· <b>did</b> 안에 이미 과거가 들어 있어요. 그래서 뒤에는 <b>원래 모양 eat</b> 을 써요.<br>· <b>did not ate</b> 는 과거를 두 번 말한 거예요. ate 는 eat 의 과거 모양이에요.<br>· <b>did not eats</b> 의 -s 도 붙이지 않아요.<br>· <b>not ate</b> 는 did 가 없어서 안 돼요.<br>· 1번에 나왔던 문장이에요.<br>· 기억법: <b>did 가 과거를 맡았으니, 뒤 동사는 쉬어요!</b>"},
+{"src":A1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>He ( ) the movie.</b><span class='ko'>(그는 그 영화를 보지 않았다.)</span>","choices":["didn't watch","didn't watched","didn't watches","not watched"],"answer":"didn't watch","exp":"정답은 <b class='en'>didn't watch</b>!<br>· <b>didn't</b> 뒤에는 <b>원래 모양 watch</b> 가 와요.<br>· <b>watched</b> 는 과거 모양이라 didn't 와 같이 못 써요.<br>· <b>watches</b> 도 안 돼요. -s 를 붙이지 않아요.<br>· <b>not watched</b> 는 did 가 빠졌어요.<br>· 4번에 나왔던 문장이에요.<br>· 짝으로 봐요: He <b>watched</b> it. ↔ He <b>didn't watch</b> it."},
+{"src":A1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>He didn't ( ) a bike.</b><span class='ko'>(그는 자전거를 원하지 않았다.)</span>","choices":["want","wanted","wantted","wants"],"answer":"want","exp":"정답은 <b class='en'>want</b>!<br>· didn't 뒤에는 <b>원래 모양</b>이 와요 → <b>want</b><br>· <b>wanted</b> 는 과거 모양이에요.<br>· <b>wantted</b> 는 없는 모양이에요. t 를 두 번 쓰지 않아요!<br>· <b>wants</b> 의 -s 도 붙이지 않아요.<br>· 21번에 나왔던 문장이에요. 별이가 <b>want</b> 라고 정확하게 고쳤어요!"},
+{"src":A1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>I didn't ( ) the answer.</b><span class='ko'>(나는 그 답을 알지 못했다.)</span>","choices":["know","knew","known","knows"],"answer":"know","exp":"정답은 <b class='en'>know</b>!<br>· didn't 뒤에는 <b>원래 모양 know</b> 가 와요.<br>· <b>knew</b> 는 know 의 과거 모양이에요. did 가 이미 과거니까 필요 없어요.<br>· <b>known</b> 과 <b>knows</b> 도 여기에 오지 않아요.<br>· 22번에 나왔던 문장이에요. 별이가 <b>know</b> 라고 정확하게 고쳤어요!<br>· 1영역 끝! <b>didn't 뒤에는 무조건 원래 모양</b>"},
+/* ───────── 2영역 · be동사 부정 vs didn't (5~8) ───────── */
+{"src":B1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>She ( ) milk this morning.</b><span class='ko'>(그녀는 오늘 아침 우유를 마시지 않았다.)</span>","choices":["didn't drink","wasn't drink","wasn't drank","not drank"],"answer":"didn't drink","exp":"정답은 <b class='en'>didn't drink</b>!<br>· <b>drink</b> 는 동작 말이에요. 동작 말은 <b>didn't 길</b>로 가요.<br>· <b>wasn't drink</b> 는 두 길을 섞은 거예요. wasn't 는 be동사 길이라 drink 와 못 만나요.<br>· <b>wasn't drank</b> 도 같은 이유로 안 돼요.<br>· <b>not drank</b> 는 did 가 빠졌어요.<br>· 2번에 나왔던 문장이에요.<br>· 확인법: <b>뒤에 동작 말이 보이면 → didn't 길!</b>"},
+{"src":B1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>We ( ) the movie.</b><span class='ko'>(우리는 그 영화를 좋아하지 않았다.)</span>","choices":["didn't like","were not like","were not liked","not liked"],"answer":"didn't like","exp":"정답은 <b class='en'>didn't like</b>!<br>· <b>like</b> 는 동작 말이라 <b>didn't</b> 를 붙여요.<br>· <b>were not like</b> 는 be동사 길과 동작 말을 섞은 거예요.<br>· 3번에 나왔던 문장이에요. 별이가 <b>didn't like</b> 를 정확하게 골랐어요!<br>· 두 길을 다시 봐요<br>be동사(was·were)가 있으면 → 뒤에 <b>not</b><br>동작 말이 있으면 → 앞에 <b>didn't</b>"},
+{"src":B1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>She ( ) happy yesterday.</b><span class='ko'>(그녀는 어제 행복하지 않았다.)</span>","choices":["wasn't","didn't","didn't be","doesn't"],"answer":"wasn't","exp":"정답은 <b class='en'>wasn't</b>!<br>· 여기는 동작 말이 없어요. <b>happy</b> 는 모습을 나타내는 말이에요.<br>· 그러면 <b>be동사 길</b>로 가요 → was + not = <b>wasn't</b><br>· <b>didn't</b> 는 동작 말이 있을 때 써요.<br>· <b>didn't be</b> 라는 말은 없어요!<br>· 이 문제는 두 길을 구별하는 연습이에요.<br>· 판단법: <b>동작 말이 있나 없나</b>부터 봐요."},
+{"src":B1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>They ( ) comic books.</b><span class='ko'>(그들은 만화책들을 읽지 않았다.)</span>","choices":["didn't read","read not","weren't read","not read"],"answer":"didn't read","exp":"정답은 <b class='en'>didn't read</b>!<br>· <b>read</b> 는 동작 말이라 앞에 <b>didn't</b> 를 붙여요.<br>· <b>read not</b> 은 not 의 자리가 틀렸어요. not 은 동작 말 뒤에 혼자 못 서요.<br>· <b>weren't read</b> 는 두 길을 섞은 거예요.<br>· 5번에 나왔던 문장이에요. 별이가 <b>didn't read</b> 를 정확하게 골랐어요!<br>· 2영역 끝! 길을 먼저 정하면 절대 안 틀려요."},
+/* ───────── 3영역 · didn't vs don't (9~12) ───────── */
+{"src":C1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>The students ( ) play soccer yesterday.</b><span class='ko'>(그 학생들은 어제 축구를 하지 않았다.)</span>","choices":["didn't","don't","doesn't","aren't"],"answer":"didn't","exp":"정답은 <b class='en'>didn't</b>!<br>· 문장 끝에 <b>yesterday</b>(어제) 가 있어요! 지나간 일이니까 <b>didn't</b> 예요.<br>· <b>don't</b> 와 <b>doesn't</b> 는 늘 그런 일(현재)에 써요.<br>· <b>aren't</b> 는 be동사 길이라 play 와 못 만나요.<br>· 7번에 나왔던 문장이에요.<br>· 요령: <b>문장 끝의 시간 표시부터 찾아요!</b><br>· 과거 표시: yesterday · last night · last Sunday · last week"},
+{"src":C1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>You ( ) get up early on Sunday.</b><span class='ko'>(너는 일요일에 일찍 일어나지 않는다.)</span>","choices":["don't","didn't","doesn't","weren't"],"answer":"don't","exp":"정답은 <b class='en'>don't</b>!<br>· 우리말이 '일어나지 <b>않는다</b>' 로 끝나요. <b>늘 그런 일</b>이라 현재예요!<br>· <b>didn't</b> 를 쓰면 '일어나지 <b>않았다</b>' 가 되어 뜻이 달라져요.<br>· <b>doesn't</b> 는 he · she · it 과 짝이에요. You 와는 <b>don't</b> 를 써요.<br>· 10번에 나왔던 문장이에요.<br>· 우리말 끝을 잘 들어요!<br><b>~않았다</b> → didn't · <b>~않는다</b> → don't"},
+{"src":C1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>I ( ) meet Clara last Sunday.</b><span class='ko'>(나는 지난 일요일에 Clara를 만나지 않았다.)</span>","choices":["didn't","don't","doesn't","wasn't"],"answer":"didn't","exp":"정답은 <b class='en'>didn't</b>!<br>· <b>last Sunday</b>(지난 일요일) 가 있어요. 지나간 일이니까 <b>didn't</b> 예요.<br>· <b>last</b> 가 붙으면 무조건 과거랍니다!<br>· 9번에 나왔던 문장이에요. 별이가 <b>didn't</b> 를 정확하게 골랐어요!<br>· 헷갈리는 짝: on Sunday(일요일마다 · 현재) ↔ last Sunday(지난 일요일 · 과거)"},
+{"src":C1,"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>My dad ( ) work today.</b><span class='ko'>(나의 아빠는 오늘 일을 하지 않는다.)</span>","choices":["doesn't","didn't","don't","isn't"],"answer":"doesn't","exp":"정답은 <b class='en'>doesn't</b>!<br>· 우리말이 '하지 <b>않는다</b>' 예요. 현재랍니다.<br>· 주어가 <b>My dad</b>(그) 라서 <b>don't</b> 가 아니라 <b>doesn't</b> 예요.<br>· <b>didn't</b> 를 쓰면 '하지 않았다' 가 되어 뜻이 달라져요.<br>· 8번에 나왔던 문장이에요.<br>· 현재 부정 짝꿍<br>I · You · We · They → <b>don't</b><br>He · She · It → <b>doesn't</b><br>· 3영역 끝!"},
+/* ───────── 4영역 · not 의 자리 (13~16) ───────── */
+{"src":D1,"q":"바른 문장을 고르세요.<br><span class='ko'>(우리는 지난 일요일에 캠핑을 가지 않았다.)</span>","choices":["We didn't go camping last Sunday.","We not went camping last Sunday.","We didn't went camping last Sunday.","We not go camping last Sunday."],"answer":"We didn't go camping last Sunday.","exp":"정답은 <b class='en'>We didn't go camping last Sunday.</b><br>· <b>not</b> 은 혼자 못 서요. 꼭 <b>did</b> 와 짝을 이뤄요 → <b>didn't</b><br>· 그리고 뒤에는 원래 모양 <b>go</b> 가 와요.<br>· <b>We not went</b> 는 did 가 없어요.<br>· <b>didn't went</b> 는 과거 모양을 또 쓴 거예요.<br>· 23번에 나왔던 문장이에요. 별이가 <b>go</b> 를 정확하게 고쳤어요!<br>· 기억법: <b>not 은 did 없이는 못 서요!</b>"},
+{"src":D1,"q":"바른 문장을 고르세요.<br><span class='ko'>(내 여동생은 침대를 정리하지 않았다.)</span>","choices":["My sister didn't make the bed.","My sister made not the bed.","My sister didn't made the bed.","My sister not made the bed."],"answer":"My sister didn't make the bed.","exp":"정답은 <b class='en'>My sister didn't make the bed.</b><br>· <b>made not</b> 은 not 의 자리가 틀렸어요.<br>· <b>didn't</b> 를 앞에 놓고 원래 모양 <b>make</b> 를 써요.<br>· <b>didn't made</b> 는 과거 모양을 또 쓴 거예요.<br>· 24번과 47번에 나왔던 문장이에요. 별이가 <b>make</b> 를 정확하게 썼어요!<br>· 주어가 My sister 여도 <b>didn't</b> 는 그대로예요."},
+{"src":D1,"q":"바른 문장을 고르세요.<br><span class='ko'>(그녀는 그 사진을 찍지 않았다.)</span>","choices":["She didn't take the photo.","She does not take the photo.","She didn't took the photo.","She not take the photo."],"answer":"She didn't take the photo.","exp":"정답은 <b class='en'>She didn't take the photo.</b><br>· '찍지 <b>않았다</b>' 는 과거예요. 그래서 <b>does</b> 가 아니라 <b>did</b> 예요.<br>· <b>does not take</b> 는 '찍지 않는다' 라는 현재가 돼요.<br>· <b>didn't took</b> 는 과거 모양을 또 쓴 거예요.<br>· 25번에 나왔던 문장이에요. 별이가 <b>did</b> 로 정확하게 고쳤어요!<br>· did 와 does 를 구별해요<br><b>did</b> = 지나간 일 · <b>does</b> = 늘 그런 일"},
+{"src":D1,"q":"바른 문장을 고르세요.<br><span class='ko'>(그는 어젯밤에 잠을 자지 않았다.)</span>","choices":["He didn't sleep last night.","He slept not last night.","He didn't slept last night.","He not sleep last night."],"answer":"He didn't sleep last night.","exp":"정답은 <b class='en'>He didn't sleep last night.</b><br>· <b>didn't</b> + 원래 모양 <b>sleep</b> 이에요.<br>· <b>slept</b> 는 sleep 의 과거 모양이라 didn't 와 같이 못 써요.<br>· <b>slept not</b> 은 not 의 자리가 틀렸어요.<br>· 29번에 나왔던 문장이에요. 별이가 <b>didn't sleep</b> 을 정확하게 썼어요!<br>· 4영역 끝! not 은 언제나 did 와 함께예요."},
+/* ───────── 5영역 · 부정문 조립 (17~20) ───────── */
+{"t":"ord","src":E1,"q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(나는 저녁을 먹지 않았다.)</span>","tiles":["I","didn't","eat","dinner"],"answer":"I didn't eat dinner","exp":"정답은 <b class='en'>I didn't eat dinner.</b><br>· 네 칸 공식: <b>누가(I) → didn't → 원래 모양(eat) → 나머지(dinner)</b><br>· <b>ate</b> 가 아니라 <b>eat</b> 이에요! did 가 이미 과거예요.<br>· 41번과 51번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"t":"ord","src":E1,"q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(Ben은 버스를 타지 않았다.)</span>","tiles":["Ben","didn't","take","a","bus"],"answer":"Ben didn't take a bus","exp":"정답은 <b class='en'>Ben didn't take a bus.</b><br>· 네 칸 공식대로 <b>Ben → didn't → take → a bus</b> 예요.<br>· <b>took</b> 이 아니라 <b>take</b> 예요!<br>· 45번과 55번에 나왔던 문장이에요. 별이가 정확하게 썼어요!<br>· 주어가 이름(Ben)이어도 <b>didn't</b> 는 그대로랍니다."},
+{"t":"ord","src":E1,"q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(그녀는 설거지를 하지 않았다.)</span>","tiles":["She","didn't","do","the","dishes"],"answer":"She didn't do the dishes","exp":"정답은 <b class='en'>She didn't do the dishes.</b><br>· 네 칸 공식: <b>She → didn't → do → the dishes</b><br>· <b>did</b> 가 아니라 <b>do</b> 예요! didn't 안에 이미 did 가 있어요.<br>· <b>do the dishes</b> 는 '설거지하다' 라는 한 덩어리예요.<br>· 44번과 54번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"t":"ord","src":E1,"q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(그는 그 답을 알지 못했다.)</span>","tiles":["He","didn't","know","the","answer"],"answer":"He didn't know the answer","exp":"정답은 <b class='en'>He didn't know the answer.</b><br>· 네 칸 공식: <b>He → didn't → know → the answer</b><br>· <b>knew</b> 가 아니라 <b>know</b> 예요!<br>· 46번과 56번에 나왔던 문장이에요. 별이가 정확하게 썼어요!<br>· 5영역 끝! 20문항 모두 수고했어요. 네 칸 공식만 기억하면 돼요."}
+];
+
+/* ══════════ 오답 클리닉 문제 (문항별 1:1 대응) ══════════ */
+var CLINIC = [
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>We didn't ( ) baseball yesterday.</b><span class='ko'>(우리는 어제 야구를 하지 않았다.)</span>","choices":["play","played","plaied","plays"],"answer":"play","exp":"정답은 <b class='en'>play</b>!<br>· didn't 뒤에는 <b>원래 모양</b>이 와요.<br>· 40번에 나왔던 문장이에요. 별이가 <b>play</b> 라고 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>They didn't ( ) television.</b><span class='ko'>(그들은 텔레비전을 보지 않았다.)</span>","choices":["watch","watched","watchs","watching"],"answer":"watch","exp":"정답은 <b class='en'>watch</b>!<br>· didn't 뒤에는 <b>원래 모양 watch</b> 예요.<br>· 27번에 나왔던 문장이에요. 별이가 <b>didn't watch</b> 를 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>I didn't ( ) the book last week.</b><span class='ko'>(나는 지난 주에 그 책을 사지 않았다.)</span>","choices":["buy","bought","buyed","buys"],"answer":"buy","exp":"정답은 <b class='en'>buy</b>!<br>· <b>bought</b> 는 buy 의 과거 모양이에요. didn't 와 같이 못 써요.<br>· <b>buyed</b> 는 없는 모양이에요.<br>· 37번과 49번에 나왔던 문장이에요."},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>She didn't ( ) in this city last year.</b><span class='ko'>(그녀는 작년에 이 도시에 살지 않았다.)</span>","choices":["live","lived","living","lives"],"answer":"live","exp":"정답은 <b class='en'>live</b>!<br>· didn't 뒤에는 <b>원래 모양 live</b> 예요.<br>· 36번에 나왔던 문장이에요. 별이가 <b>didn't</b> 를 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>Mike ( ) his hands.</b><span class='ko'>(Mike는 그의 손을 씻지 않았다.)</span>","choices":["didn't wash","wasn't wash","wasn't washed","not washed"],"answer":"didn't wash","exp":"정답은 <b class='en'>didn't wash</b>!<br>· <b>wash</b> 는 동작 말이라 <b>didn't 길</b>로 가요.<br>· 39번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>Sally ( ) a hat.</b><span class='ko'>(Sally는 모자를 쓰지 않았다.)</span>","choices":["didn't wear","wasn't wear","wasn't wore","not wore"],"answer":"didn't wear","exp":"정답은 <b class='en'>didn't wear</b>!<br>· <b>wear</b> 는 동작 말이니 <b>didn't</b> 를 붙여요.<br>· 39번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>They ( ) tired last night.</b><span class='ko'>(그들은 어젯밤에 피곤하지 않았다.)</span>","choices":["weren't","didn't","didn't be","don't"],"answer":"weren't","exp":"정답은 <b class='en'>weren't</b>!<br>· 동작 말이 없어요. <b>tired</b> 는 모습을 나타내는 말이라 <b>be동사 길</b>이에요.<br>· were + not = <b>weren't</b>"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>The bus ( ) at the bus stop.</b><span class='ko'>(그 버스는 정류장에 멈추지 않았다.)</span>","choices":["didn't stop","wasn't stop","stopped not","not stopped"],"answer":"didn't stop","exp":"정답은 <b class='en'>didn't stop</b>!<br>· <b>stop</b> 은 동작 말이니 <b>didn't</b> 를 붙여요.<br>· 35번에 나왔던 문장이에요. 별이가 <b>didn't</b> 를 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>I ( ) the train yesterday.</b><span class='ko'>(나는 어제 기차를 타지 않았다.)</span>","choices":["didn't take","don't take","doesn't take","didn't took"],"answer":"didn't take","exp":"정답은 <b class='en'>didn't take</b>!<br>· <b>yesterday</b> 가 있으니 과거예요 → <b>didn't</b><br>· 30번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>We ( ) computer games.</b><span class='ko'>(우리는 컴퓨터 게임을 하지 않는다.)</span>","choices":["don't play","didn't play","doesn't play","weren't play"],"answer":"don't play","exp":"정답은 <b class='en'>don't play</b>!<br>· 우리말이 '하지 <b>않는다</b>' 예요. 늘 그런 일이라 현재랍니다.<br>· '하지 <b>않았다</b>' 였다면 didn't play 예요.<br>· 19번에 나왔던 문장이에요."},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>It ( ) yesterday.</b><span class='ko'>(어제 비가 오지 않았다.)</span>","choices":["didn't rain","doesn't rain","don't rain","wasn't rain"],"answer":"didn't rain","exp":"정답은 <b class='en'>didn't rain</b>!<br>· <b>yesterday</b> 가 있으니 과거예요.<br>· 20번에 나왔던 문장이에요."},
+{"q":"빈칸에 알맞은 말을 고르세요.<br><b class='en'>They ( ) to school yesterday.</b><span class='ko'>(그들은 어제 학교에 가지 않았다.)</span>","choices":["didn't go","don't go","didn't went","doesn't go"],"answer":"didn't go","exp":"정답은 <b class='en'>didn't go</b>!<br>· <b>yesterday</b> 가 있으니 <b>didn't</b> 예요.<br>· 그리고 원래 모양 <b>go</b> 를 써요. went 는 과거 모양이에요.<br>· 18번에 나왔던 문장이에요."},
+{"q":"바른 문장을 고르세요.<br><span class='ko'>(그는 그 차를 빨리 운전하지 않았다.)</span>","choices":["He didn't drive a car fast.","He drove not a car fast.","He didn't drove a car fast.","He not drive a car fast."],"answer":"He didn't drive a car fast.","exp":"정답은 <b class='en'>He didn't drive a car fast.</b><br>· <b>not</b> 은 did 와 짝을 이뤄야 해요 → didn't<br>· 뒤에는 원래 모양 <b>drive</b> 예요.<br>· 31번에 나왔던 문장이에요. 별이가 <b>didn't</b> 를 정확하게 썼어요!"},
+{"q":"바른 문장을 고르세요.<br><span class='ko'>(우리는 어제 학교에 걸어가지 않았다.)</span>","choices":["We didn't walk to school yesterday.","We walked not to school yesterday.","We didn't walked to school yesterday.","We not walk to school yesterday."],"answer":"We didn't walk to school yesterday.","exp":"정답은 <b class='en'>We didn't walk to school yesterday.</b><br>· <b>didn't</b> + 원래 모양 <b>walk</b> 예요.<br>· 32번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"q":"바른 문장을 고르세요.<br><span class='ko'>(그녀는 오늘 아침에 빵을 먹지 않았다.)</span>","choices":["She didn't eat bread this morning.","She ate not bread this morning.","She didn't ate bread this morning.","She does not eat bread this morning."],"answer":"She didn't eat bread this morning.","exp":"정답은 <b class='en'>She didn't eat bread this morning.</b><br>· <b>didn't</b> + 원래 모양 <b>eat</b> 이에요.<br>· <b>ate</b> 는 과거 모양이라 didn't 와 같이 못 써요.<br>· 26번에 나왔던 문장이에요."},
+{"q":"바른 문장을 고르세요.<br><span class='ko'>(내 남동생은 일찍 일어나지 않았다.)</span>","choices":["My brother didn't get up early.","My brother got up not early.","My brother didn't got up early.","My brother not get up early."],"answer":"My brother didn't get up early.","exp":"정답은 <b class='en'>My brother didn't get up early.</b><br>· <b>didn't</b> + 원래 모양 <b>get up</b> 이에요.<br>· 33번에 나왔던 문장이에요. 별이가 <b>didn't</b> 를 정확하게 썼어요!"},
+{"t":"ord","q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(그는 아침에 일찍 일어나지 않았다.)</span>","tiles":["He","didn't","get","up","early"],"answer":"He didn't get up early","exp":"정답은 <b class='en'>He didn't get up early.</b><br>· 네 칸 공식: <b>He → didn't → get up → early</b><br>· 42번과 52번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"t":"ord","q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(그들은 그 영화를 보지 않았다.)</span>","tiles":["They","didn't","watch","the","movie"],"answer":"They didn't watch the movie","exp":"정답은 <b class='en'>They didn't watch the movie.</b><br>· 네 칸 공식: <b>They → didn't → watch → the movie</b><br>· 43번과 53번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"t":"ord","q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(우리는 캠핑을 가지 않았다.)</span>","tiles":["We","didn't","go","camping"],"answer":"We didn't go camping","exp":"정답은 <b class='en'>We didn't go camping.</b><br>· 네 칸 공식: <b>We → didn't → go → camping</b><br>· <b>went</b> 가 아니라 <b>go</b> 예요!<br>· 48번과 58번에 나왔던 문장이에요. 별이가 정확하게 썼어요!"},
+{"t":"ord","q":"낱말을 <b>바른 순서</b>로 배열하세요.<br><span class='ko'>(그녀는 모자를 쓰지 않았다.)</span>","tiles":["She","didn't","wear","a","hat"],"answer":"She didn't wear a hat","exp":"정답은 <b class='en'>She didn't wear a hat.</b><br>· 네 칸 공식: <b>She → didn't → wear → a hat</b><br>· 50번과 60번에 나왔던 문장이에요. 별이가 정확하게 썼어요!<br>· 이제 64번부터도 이 공식으로 풀면 돼요!"}
+];
+
+/* ══════════ 정답 영어 읽어 주기 ══════════ */
+var SAY_ALL = [
+"I did not eat dinner last night.",
+"He didn't watch the movie.",
+"He didn't want a bike.",
+"I didn't know the answer.",
+"She didn't drink milk this morning.",
+"We didn't like the movie.",
+"She wasn't happy yesterday.",
+"They didn't read comic books.",
+"The students didn't play soccer yesterday.",
+"You don't get up early on Sunday.",
+"I didn't meet Clara last Sunday.",
+"My dad doesn't work today.",
+"We didn't go camping last Sunday.",
+"My sister didn't make the bed.",
+"She didn't take the photo.",
+"He didn't sleep last night.",
+"I didn't eat dinner.",
+"Ben didn't take a bus.",
+"She didn't do the dishes.",
+"He didn't know the answer."
+];
+var SAY_CLINIC = [
+"We didn't play baseball yesterday.",
+"They didn't watch television.",
+"I didn't buy the book last week.",
+"She didn't live in this city last year.",
+"Mike didn't wash his hands.",
+"Sally didn't wear a hat.",
+"They weren't tired last night.",
+"The bus didn't stop at the bus stop.",
+"I didn't take the train yesterday.",
+"We don't play computer games.",
+"It didn't rain yesterday.",
+"They didn't go to school yesterday.",
+"He didn't drive a car fast.",
+"We didn't walk to school yesterday.",
+"She didn't eat bread this morning.",
+"My brother didn't get up early.",
+"He didn't get up early.",
+"They didn't watch the movie.",
+"We didn't go camping.",
+"She didn't wear a hat."
+];
+(function attachSay() {
+  ALL.forEach(function (q, i) { q.say = SAY_ALL[i] || ""; });
+  CLINIC.forEach(function (q, i) { q.say = SAY_CLINIC[i] || ""; });
+})();
+
+/* ══════════ 영역 · 카드 배치 ══════════ */
+var SECTIONS = [
+  { name: "1영역 · didn't 뒤에는 원래 모양",   start: 0,  end: 4,  cards: [A1] },
+  { name: "2영역 · wasn't 길과 didn't 길",     start: 4,  end: 8,  cards: [B1] },
+  { name: "3영역 · didn't 인가 don't 인가",    start: 8,  end: 12, cards: [C1] },
+  { name: "4영역 · not 의 자리",               start: 12, end: 16, cards: [D1] },
+  { name: "5영역 · 부정문 조립 · 네 칸 공식",   start: 16, end: 20, cards: [E1] }
+];
+var NSEC = SECTIONS.length;
+function secIndex(i) {
+  for (var s = 0; s < NSEC; s++) { if (i < SECTIONS[s].end) return s; }
+  return NSEC - 1;
+}
+var CARD_AT = { 0: A1, 4: B1, 8: C1, 12: D1, 16: E1 };
+
+/* ══════════ 정답 위치 균등 분산 (같은 위치 3연속 금지) ══════════ */
+function shuffleArr(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function balancedAssign(n, k) {
+  var pool = [];
+  var base = Math.floor(n / k);
+  for (var p = 0; p < k; p++) { for (var c = 0; c < base; c++) pool.push(p); }
+  var remainder = n - pool.length;
+  var extra = shuffleArr([0, 1, 2, 3]).slice(0, remainder);
+  extra.forEach(function (p) { pool.push(p); });
+  return shuffleArr(pool);
+}
+function hasTripleRun(arr) {
+  for (var i = 2; i < arr.length; i++) {
+    if (arr[i] === arr[i - 1] && arr[i - 1] === arr[i - 2]) return true;
+  }
+  return false;
+}
+function balancedNoTriple(n, k) {
+  var t = balancedAssign(n, k);
+  for (var tries = 0; tries < 300 && hasTripleRun(t); tries++) t = balancedAssign(n, k);
+  return t;
+}
+function prepareList(list, from, to) {
+  var mcIdx = [];
+  for (var idx = from; idx < to; idx++) {
+    var q = list[idx];
+    if (q.t === "ord") {
+      var ti = [];
+      for (var z = 0; z < q.tiles.length; z++) ti.push(z);
+      q.shuffled = shuffleArr(ti);
+    } else { mcIdx.push(idx); }
+  }
+  var targets = balancedNoTriple(mcIdx.length, 4);
+  mcIdx.forEach(function (idx, mi) {
+    var q = list[idx];
+    var sh = shuffleArr(q.choices);
+    var cur = sh.indexOf(q.answer);
+    var tg = targets[mi];
+    var tmp = sh[tg]; sh[tg] = sh[cur]; sh[cur] = tmp;
+    q.shuffled = sh;
+  });
+}
+(function prepareAll() {
+  SECTIONS.forEach(function (sec) {
+    prepareList(ALL, sec.start, sec.end);
+    prepareList(CLINIC, sec.start, sec.end);
+  });
+})();
+
+/* ══════════ 정답 영어 소리로 듣기 ══════════ */
+var SOUND_KEY = "engfit-sound-on";
+var soundOn = true;
+try { soundOn = localStorage.getItem(SOUND_KEY) !== "off"; } catch (e) {}
+
+var EN_VOICE = null;
+function pickVoice() {
+  try {
+    var vs = window.speechSynthesis.getVoices() || [];
+    var en = vs.filter(function (v) { return /^en/i.test(v.lang || ""); });
+    EN_VOICE = en.filter(function (v) { return /en[-_]US/i.test(v.lang || ""); })[0] || en[0] || null;
+  } catch (e) {}
+}
+if (window.speechSynthesis) {
+  pickVoice();
+  try { window.speechSynthesis.onvoiceschanged = pickVoice; } catch (e) {}
+}
+
+/* iOS 등에서 첫 소리가 나오도록, 시작 버튼을 누를 때 미리 한 번 깨워 둔다 */
+var _voiceWarmed = false;
+function warmUpVoice() {
+  if (_voiceWarmed || !window.speechSynthesis) return;
+  _voiceWarmed = true;
+  try {
+    var u = new SpeechSynthesisUtterance(" ");
+    u.volume = 0; u.lang = "en-US";
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+function showSayBar(text) {
+  var t = document.getElementById("saytext");
+  if (t) t.textContent = text;
+  var bar = document.getElementById("saybar");
+  if (bar) bar.classList.remove("hidden");
+}
+function hideSayBar() {
+  var bar = document.getElementById("saybar");
+  if (bar) bar.classList.add("hidden");
+}
+function stopSpeaking() {
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
+  hideSayBar();
+}
+
+/* 정답 영어를 읽어 준 뒤 onDone 실행.
+   소리가 꺼져 있거나 브라우저가 지원하지 않으면 기다리지 않고 바로 넘어간다. */
+function speakAnswer(text, onDone) {
+  var done = false;
+  function finish() {
+    if (done) return;
+    done = true;
+    hideSayBar();
+    onDone();
+  }
+  if (!soundOn || !text || !window.speechSynthesis) { setTimeout(finish, 250); return; }
+  showSayBar(text);
+  try {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    if (EN_VOICE) u.voice = EN_VOICE;
+    u.rate = 0.82;
+    u.pitch = 1;
+    u.onend = function () { setTimeout(finish, 400); };
+    u.onerror = finish;
+    window.speechSynthesis.speak(u);
+    /* 소리가 끝나지 않는 환경에서도 멈추지 않도록 하는 안전장치 */
+    setTimeout(finish, Math.min(11000, 2400 + text.length * 95));
+  } catch (e) { setTimeout(finish, 700); }
+}
+
+/* ══════════ 정답 음원 재생 (카톡 인앱 브라우저에서도 나오도록 파일 재생) ══════════ */
+function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+var AUDIO_EL = null;
+function getAudioEl() {
+  if (!AUDIO_EL) {
+    AUDIO_EL = new Audio();
+    AUDIO_EL.preload = "auto";
+  }
+  return AUDIO_EL;
+}
+function stopAudio() {
+  try { if (AUDIO_EL) { AUDIO_EL.pause(); AUDIO_EL.onended = null; AUDIO_EL.onerror = null; AUDIO_EL.onplaying = null; } } catch (e) {}
+}
+
+/* 정답 음원을 들려준 뒤 onDone 실행.
+   1순위 음원 파일 → 2순위 브라우저 읽기(TTS) → 3순위 그냥 넘어가기 */
+function playAnswer(file, text, onDone) {
+  var done = false;
+  function finish() {
+    if (done) return;
+    done = true;
+    stopAudio();
+    hideSayBar();
+    onDone();
+  }
+  if (!soundOn || !text) { setTimeout(finish, 250); return; }
+  showSayBar(text);
+
+  var usedFallback = false;
+  function fallback() {
+    if (done || usedFallback) return;
+    usedFallback = true;
+    stopAudio();
+    speakAnswer(text, finish);
+  }
+
+  var a = getAudioEl();
+  var startGuard = setTimeout(fallback, 2600);
+  try {
+    a.onplaying = function () { clearTimeout(startGuard); };
+    a.onended = function () { clearTimeout(startGuard); setTimeout(finish, 350); };
+    a.onerror = function () { clearTimeout(startGuard); fallback(); };
+    a.src = "audio/" + file + ".wav?v=1";
+    a.currentTime = 0;
+    var p = a.play();
+    if (p && p.catch) { p.catch(function () { clearTimeout(startGuard); fallback(); }); }
+  } catch (e) { clearTimeout(startGuard); fallback(); }
+
+  /* 어떤 경우에도 화면이 멈추지 않게 하는 최종 안전장치 */
+  setTimeout(finish, Math.min(13000, 4000 + text.length * 95));
+}
+
+/* ══════════ 진행 상태 ══════════ */
+var studentName = "";
+var current = 0;
+var answersLog = new Array(ALL.length).fill(null);
+var elapsed = new Array(NSEC).fill(0);
+var sent = new Array(NSEC).fill(false);
+var clinicSent = new Array(NSEC).fill(false);
+var lastTick = 0;
+var curSec = 0;
+var cardsShown = {};
+var pendingCard = 0;
+var MODE = "quiz";
+
+var clinicList = [];
+var clinicPos = 0;
+var clinicLog = [];
+var clinicSec = 0;
+
+var SAVE_KEY = "chahojin-basic-20260907";
+function saveState() {
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      v: 1, name: studentName, current: current, log: answersLog,
+      elapsed: elapsed, sent: sent, clinicSent: clinicSent, cards: cardsShown,
+      choices: ALL.map(function (q) { return q.shuffled || null; })
+    }));
+  } catch (e) {}
+}
+function loadState() {
+  try {
+    var s = JSON.parse(localStorage.getItem(SAVE_KEY));
+    return (s && s.v === 1 && s.name && s.log) ? s : null;
+  } catch (e) { return null; }
+}
+function clearState() { try { localStorage.removeItem(SAVE_KEY); } catch (e) {} }
+
+var ALL_CARDS = ["start-card", "resume-card", "cards-card", "quiz-card", "sec-result-card",
+                 "clinic-why-card", "clinic-card", "clinic-result-card"];
+function show(id) {
+  stopSpeaking();
+  stopAudio();
+  ALL_CARDS.forEach(function (c) {
+    document.getElementById(c).classList.toggle("hidden", c !== id);
+  });
+  if (id === "start-card") refreshSectionButtons();
+  window.scrollTo(0, 0);
+}
+
+function secDone(si) {
+  var s = SECTIONS[si];
+  for (var i = s.start; i < s.end; i++) { if (!answersLog[i]) return false; }
+  return true;
+}
+function firstUndoneSec() {
+  for (var i = 0; i < NSEC; i++) { if (!secDone(i)) return i; }
+  return -1;
+}
+function refreshSectionButtons() {
+  var doneList = [];
+  secBtns.forEach(function (btn, si) {
+    var done = secDone(si);
+    btn.classList.toggle("done", done);
+    if (done) doneList.push(si + 1);
+  });
+  var note = document.getElementById("sec-done-note");
+  if (note) {
+    note.textContent = doneList.length
+      ? "다 푼 영역: " + doneList.join("영역, ") + "영역 (다시 눌러 복습할 수 있어요)"
+      : "";
+  }
+}
+
+/* ══════════ 카드 → 문제 2개 ══════════ */
+function step() {
+  var si = secIndex(current);
+  curSec = si;
+  if (CARD_AT[current] && !cardsShown[current]) { showCardScreen(current); }
+  else { MODE = "quiz"; show("quiz-card"); showQuestion(); }
+}
+function showCardScreen(i) {
+  pendingCard = i;
+  var sec = SECTIONS[curSec];
+  var title = CARD_AT[i];
+  var pos = sec.cards.indexOf(title) + 1;
+  document.getElementById("card-num").textContent = "개념 카드 " + pos + " / " + sec.cards.length;
+  document.getElementById("card-sec").textContent = sec.name.split(" · ")[0];
+  document.getElementById("card-bar").style.width = (pos / sec.cards.length * 100) + "%";
+  document.getElementById("cardbox").innerHTML = "<h2>" + title + "</h2>" + (TIPS[title] || "");
+  show("cards-card");
+}
+function afterCard() {
+  cardsShown[pendingCard] = true;
+  saveState();
+  MODE = "quiz";
+  show("quiz-card");
+  showQuestion();
+}
+document.getElementById("card-next").addEventListener("click", afterCard);
+document.getElementById("card-skip").addEventListener("click", afterCard);
+
+/* ══════════ 시작 / 이어하기 ══════════ */
+var nameInput = document.getElementById("name-input");
+var secBtns = [].slice.call(document.querySelectorAll(".sec-start"));
+var soundBox = document.getElementById("sound-on");
+if (soundBox) {
+  soundBox.checked = soundOn;
+  soundBox.addEventListener("change", function () {
+    soundOn = soundBox.checked;
+    try { localStorage.setItem(SOUND_KEY, soundOn ? "on" : "off"); } catch (e) {}
+    if (!soundOn) stopSpeaking();
+  });
+}
+var testBtn = document.getElementById("sound-test");
+var soundMsg = document.getElementById("sound-msg");
+function setMsg(txt, color) {
+  if (!soundMsg) return;
+  soundMsg.textContent = txt;
+  soundMsg.style.color = color;
+}
+if (testBtn) {
+  testBtn.addEventListener("click", function () {
+    warmUpVoice();
+    setMsg("소리를 내는 중이에요...", "#6B7B7E");
+    var a = getAudioEl();
+    var started = false;
+    a.onplaying = function () {
+      started = true;
+      setMsg("소리가 나오고 있어요! 안 들리면 휴대폰 볼륨을 올려 주세요.", "#2F7C83");
+    };
+    a.onended = function () {
+      if (started) setMsg("소리 확인 완료! 이제 시작해도 좋아요.", "#2F7C83");
+    };
+    a.onerror = function () {
+      setMsg("소리 파일을 못 불러왔어요. 아래 안내대로 다른 브라우저로 열어 주세요.", "#b5762f");
+    };
+    try {
+      a.src = "audio/test.wav?v=1";
+      a.currentTime = 0;
+      var p = a.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          setMsg("브라우저가 소리를 막았어요. 아래 안내대로 다른 브라우저로 열어 주세요.", "#b5762f");
+        });
+      }
+    } catch (e) {
+      setMsg("소리를 재생할 수 없어요. 아래 안내대로 다른 브라우저로 열어 주세요.", "#b5762f");
+    }
+  });
+}
+function syncNameGate() {
+  var ok = nameInput.value.trim().length > 0;
+  secBtns.forEach(function (b) { b.disabled = !ok; });
+}
+nameInput.addEventListener("input", syncNameGate);
+nameInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && nameInput.value.trim()) secBtns[0].click();
+});
+function startSection(si) {
+  var typed = nameInput.value.trim();
+  if (!typed) { nameInput.focus(); return; }
+  studentName = typed;
+  warmUpVoice();
+  var s = SECTIONS[si];
+  for (var i = s.start; i < s.end; i++) { answersLog[i] = null; }
+  elapsed[si] = 0;
+  sent[si] = false;
+  clinicSent[si] = false;
+  Object.keys(CARD_AT).forEach(function (k) { if (+k >= s.start && +k < s.end) delete cardsShown[k]; });
+  current = s.start;
+  curSec = si;
+  lastTick = Date.now();
+  saveState();
+  step();
+}
+secBtns.forEach(function (b) {
+  b.addEventListener("click", function () { startSection(parseInt(b.getAttribute("data-sec"), 10)); });
+});
+
+var savedState = loadState();
+function applySaved(s) {
+  studentName = s.name;
+  current = s.current;
+  answersLog = (s.log || []).slice(0, ALL.length);
+  while (answersLog.length < ALL.length) answersLog.push(null);
+  elapsed = s.elapsed || new Array(NSEC).fill(0);
+  while (elapsed.length < NSEC) elapsed.push(0);
+  sent = s.sent || new Array(NSEC).fill(false);
+  while (sent.length < NSEC) sent.push(false);
+  clinicSent = s.clinicSent || new Array(NSEC).fill(false);
+  while (clinicSent.length < NSEC) clinicSent.push(false);
+  cardsShown = s.cards || {};
+  if (s.choices) {
+    ALL.forEach(function (q, i) { if (s.choices[i]) q.shuffled = s.choices[i]; });
+  }
+}
+if (savedState && savedState.log && savedState.log.some(function (l) { return !!l; })) {
+  var doneCnt = savedState.log.filter(function (l) { return !!l; }).length;
+  document.getElementById("resume-info").textContent =
+    savedState.name + " · " + doneCnt + "문제까지 푼 기록이 있어요. 이어서 풀까요?";
+  show("resume-card");
+} else {
+  syncNameGate();
+}
+document.getElementById("resume-btn").addEventListener("click", function () {
+  applySaved(savedState);
+  nameInput.value = studentName;
+  syncNameGate();
+  lastTick = Date.now();
+  curSec = secIndex(Math.min(current, ALL.length - 1));
+  var prevSec = current > 0 ? secIndex(current - 1) : -1;
+  if (prevSec >= 0 && current === SECTIONS[prevSec].end && secDone(prevSec)) {
+    showSectionResult(prevSec);
+  } else if (current >= ALL.length) {
+    showSectionResult(NSEC - 1);
+  } else { step(); }
+});
+document.getElementById("restart-btn").addEventListener("click", function () {
+  clearState();
+  answersLog = new Array(ALL.length).fill(null);
+  elapsed = new Array(NSEC).fill(0);
+  sent = new Array(NSEC).fill(false);
+  clinicSent = new Array(NSEC).fill(false);
+  cardsShown = {}; current = 0;
+  nameInput.value = "";
+  syncNameGate();
+  show("start-card");
+});
+document.getElementById("pick-sec-btn").addEventListener("click", function () {
+  nameInput.value = studentName; syncNameGate(); show("start-card");
+});
+document.getElementById("cr-pick-btn").addEventListener("click", function () {
+  nameInput.value = studentName; syncNameGate(); show("start-card");
+});
+
+/* ══════════ 낱말 배열(ord) ══════════ */
+function ordNorm(s) {
+  return String(s).toLowerCase().replace(/[.,?!;:]/g, "").replace(/\s+/g, " ").trim();
+}
+var ordPicked = [];
+function renderOrd(q, box) {
+  ordPicked = [];
+  var help = document.createElement("p");
+  help.className = "ord-help";
+  help.innerHTML = "아래 낱말을 <b>순서대로</b> 눌러 주세요. 잘못 눌렀으면 위쪽 칸의 낱말을 다시 눌러 뺄 수 있어요.";
+  var slot = document.createElement("div"); slot.className = "ord-slot";
+  var pool = document.createElement("div"); pool.className = "ord-pool";
+  var okBtn = document.createElement("button");
+  okBtn.className = "btn center"; okBtn.textContent = "다 골랐어요 · 확인하기"; okBtn.disabled = true;
+  var reBtn = document.createElement("button");
+  reBtn.className = "btn sub-btn center"; reBtn.textContent = "처음부터 다시 배열하기";
+  box.appendChild(help); box.appendChild(slot); box.appendChild(pool);
+  box.appendChild(okBtn); box.appendChild(reBtn);
+  function draw() {
+    slot.innerHTML = "";
+    if (ordPicked.length === 0) {
+      var ph = document.createElement("span");
+      ph.className = "ord-ph"; ph.textContent = "여기에 문장이 만들어져요";
+      slot.appendChild(ph);
+    }
+    ordPicked.forEach(function (ti, pos) {
+      var b = document.createElement("button");
+      b.className = "ord-tile picked"; b.textContent = q.tiles[ti];
+      b.addEventListener("click", function () { ordPicked.splice(pos, 1); draw(); });
+      slot.appendChild(b);
+    });
+    pool.innerHTML = "";
+    q.shuffled.forEach(function (ti) {
+      if (ordPicked.indexOf(ti) >= 0) return;
+      var b = document.createElement("button");
+      b.className = "ord-tile"; b.textContent = q.tiles[ti];
+      b.addEventListener("click", function () { ordPicked.push(ti); draw(); });
+      pool.appendChild(b);
+    });
+    okBtn.disabled = (ordPicked.length !== q.tiles.length);
+  }
+  reBtn.addEventListener("click", function () { ordPicked = []; draw(); });
+  okBtn.addEventListener("click", function () {
+    if (ordPicked.length !== q.tiles.length) return;
+    pick(ordPicked.map(function (ti) { return q.tiles[ti]; }).join(" "));
+  });
+  draw();
+}
+
+/* ══════════ 문제 표시 ══════════ */
+var CIRCLED = ["①", "②", "③", "④"];
+function showQuestion() {
+  var q = ALL[current];
+  var si = secIndex(current);
+  curSec = si;
+  var sec = SECTIONS[si];
+  document.getElementById("prog-num").textContent =
+    sec.name.split(" · ")[0] + "  ·  " + (current - sec.start + 1) + " / " + (sec.end - sec.start);
+  document.getElementById("prog-pct").textContent = "전체 " + Math.round(current / ALL.length * 100) + "%";
+  document.getElementById("bar-fill").style.width = ((current - sec.start) / (sec.end - sec.start) * 100) + "%";
+  document.getElementById("srctag").textContent = q.src;
+  document.getElementById("tipinner").innerHTML = "<b>" + q.src + "</b><br>" + (TIPS[q.src] || "");
+  document.getElementById("tipbox").open = false;
+  document.getElementById("qtext").innerHTML = "Q" + (current + 1) + ". " + q.q;
+  var box = document.getElementById("choices");
+  box.innerHTML = "";
+  document.getElementById("keyhint").classList.toggle("hidden", q.t === "ord");
+  if (q.t === "ord") { renderOrd(q, box); lastTick = Date.now(); window.scrollTo(0, 0); return; }
+  q.shuffled.forEach(function (c, i) {
+    var b = document.createElement("button");
+    b.className = "choice";
+    b.innerHTML = '<span class="num">' + CIRCLED[i] + "</span>" + c;
+    b.addEventListener("click", function () { pick(c); });
+    box.appendChild(b);
+  });
+  lastTick = Date.now();
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener("keydown", function (e) {
+  var n = parseInt(e.key, 10);
+  if (!(n >= 1 && n <= 4)) return;
+  if (MODE === "quiz" && !document.getElementById("quiz-card").classList.contains("hidden")) {
+    var q = ALL[current];
+    if (q && q.shuffled && q.t !== "ord" && n <= q.shuffled.length) pick(q.shuffled[n - 1]);
+  } else if (MODE === "clinic" && !document.getElementById("clinic-card").classList.contains("hidden")) {
+    var cq = CLINIC[clinicList[clinicPos]];
+    if (cq && cq.shuffled && cq.t !== "ord" && n <= cq.shuffled.length) pick(cq.shuffled[n - 1]);
+  }
+});
+
+var locked = false;
+function pick(choice) {
+  if (locked) return; locked = true;
+  if (MODE === "clinic") { clinicAnswer(choice); return; }
+  var q = ALL[current];
+  var si = secIndex(current);
+  var ok = (q.t === "ord") ? (ordNorm(choice) === ordNorm(q.answer)) : (choice === q.answer);
+  answersLog[current] = { no: current + 1, ok: ok, chosen: choice, answer: q.answer };
+  elapsed[si] += Math.min(180, Math.round((Date.now() - lastTick) / 1000));
+  var qi = current;
+  current++;
+  saveState();
+  playAnswer("q" + pad2(qi + 1), q.say, function () {
+    locked = false;
+    if (current === SECTIONS[si].end) showSectionResult(si);
+    else step();
+  });
+}
+
+/* ══════════ 공통 도구 ══════════ */
+function copyText(btn, text, doneLabel) {
+  navigator.clipboard.writeText(text).then(function () {
+    btn.textContent = doneLabel;
+  }).catch(function () {
+    prompt("아래 내용을 길게 눌러 복사하세요", text);
+  });
+}
+function plain(s) { return String(s).replace(/<[^>]*>/g, ""); }
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+function secStats(si) {
+  var sec = SECTIONS[si];
+  var slice = answersLog.slice(sec.start, sec.end).filter(function (l) { return !!l; });
+  var score = slice.filter(function (l) { return l.ok; }).length;
+  var wrong = slice.filter(function (l) { return !l.ok; }).map(function (l) { return l.no; });
+  return { slice: slice, score: score, total: sec.end - sec.start, wrong: wrong };
+}
+function sectionMsg(si) {
+  var st = secStats(si);
+  return "[영핏 과거형 부정문 기초 다지기 " + (si + 1) + "/" + NSEC + " 결과]\n학생: " + studentName +
+         "\n영역: " + SECTIONS[si].name +
+         "\n점수: " + st.score + "/" + st.total +
+         "\n풀이 시간: " + Math.max(1, Math.round(elapsed[si] / 60)) + "분" +
+         "\n틀린 문항: " + (st.wrong.length ? st.wrong.join(", ") : "없음") +
+         "\n- 영핏 지나티처";
+}
+function totalMsg() {
+  var parts = SECTIONS.map(function (s, si) {
+    var st = secStats(si);
+    return (si + 1) + "영역 " + st.score + "/" + st.total;
+  });
+  var done = answersLog.filter(function (l) { return !!l; });
+  var totalScore = done.filter(function (l) { return l.ok; }).length;
+  var allWrong = done.filter(function (l) { return !l.ok; }).map(function (l) { return l.no; });
+  return "[영핏 과거형 부정문 기초 다지기 최종 결과]\n학생: " + studentName +
+         "\n내용: 임별 일반동사 과거형 부정문 기초 다지기 (20문항)" +
+         "\n" + parts.join(" / ") +
+         "\n총점: " + totalScore + "/" + ALL.length +
+         "\n틀린 문항: " + (allWrong.length ? allWrong.join(", ") : "없음") +
+         "\n- 영핏 지나티처";
+}
+function clinicMsg() {
+  var score = clinicLog.filter(function (l) { return l && l.ok; }).length;
+  return "[영핏 오답 클리닉 결과]\n학생: " + studentName +
+         "\n영역: " + SECTIONS[clinicSec].name +
+         "\n클리닉 점수: " + score + "/" + clinicLog.length +
+         "\n다시 풀어 본 문항: " + clinicList.map(function (i) { return i + 1; }).join(", ") +
+         "\n- 영핏 지나티처";
+}
+
+/* ══════════ 영역 결과 ══════════ */
+function showSectionResult(si) {
+  MODE = "quiz";
+  var st = secStats(si);
+  var allDone = firstUndoneSec() === -1;
+  document.getElementById("sec-result-title").textContent =
+    allDone ? "모든 영역 완료! 정말 수고했어요" : (si + 1) + "영역 완료! 잘했어요";
+  document.getElementById("sec-score").textContent = st.score + " / " + st.total;
+  document.getElementById("sec-wrong").textContent =
+    st.wrong.length ? "틀린 문항: " + st.wrong.join(", ") + " — 아래 해설을 읽고 오답 클리닉으로 한 번 더 잡아요!"
+                    : "이 영역 전부 정답! 최고예요";
+
+  var copyBtn = document.getElementById("sec-copy-btn");
+  copyBtn.textContent = (si + 1) + "영역 결과 복사 (카톡용)";
+  copyBtn.onclick = function () { copyText(copyBtn, sectionMsg(si), "복사 완료! 카톡에 붙여넣기 하세요"); };
+
+  var clinicBtn = document.getElementById("clinic-start-btn");
+  if (st.wrong.length) {
+    clinicBtn.classList.remove("hidden");
+    clinicBtn.textContent = "오답 클리닉 시작 · " + st.wrong.length + "문제 다시 잡기";
+    clinicBtn.onclick = function () { startClinic(si); };
+  } else {
+    clinicBtn.classList.add("hidden");
+  }
+
+  var nextBtn = document.getElementById("next-sec-btn");
+  var nextSi = firstUndoneSec();
+  if (allDone) {
+    nextBtn.classList.add("hidden");
+    var totalScore = answersLog.filter(function (l) { return l && l.ok; }).length;
+    document.getElementById("total-block").classList.remove("hidden");
+    document.getElementById("total-score").textContent = totalScore + " / " + ALL.length;
+    document.getElementById("total-detail").textContent =
+      SECTIONS.map(function (s, idx) { var t = secStats(idx); return (idx + 1) + "영역 " + t.score + "/" + t.total; }).join("  ·  ");
+    var totalBtn = document.getElementById("total-copy-btn");
+    totalBtn.onclick = function () { copyText(totalBtn, totalMsg(), "복사 완료! 카톡에 붙여넣기 하세요"); };
+  } else {
+    nextBtn.classList.remove("hidden");
+    document.getElementById("total-block").classList.add("hidden");
+    nextBtn.textContent = "쉬었다가 " + (nextSi + 1) + "영역 개념 카드 보기";
+    nextBtn.onclick = function () { current = SECTIONS[nextSi].start; curSec = nextSi; lastTick = Date.now(); saveState(); step(); };
+  }
+
+  var expBox = document.getElementById("sec-explanations");
+  expBox.innerHTML = "";
+  st.slice.forEach(function (log) {
+    var q = ALL[log.no - 1];
+    var d = document.createElement("div");
+    d.className = "exp" + (log.ok ? "" : " wrong");
+    var ansLine = log.ok ? "" :
+      '<span class="ans-line">내가 고른 답: ' + esc(plain(log.chosen)) + " → 정답: " + esc(plain(q.answer)) + "</span>";
+    d.innerHTML = '<div class="exp-head"><b>Q' + log.no + " " +
+      (log.ok ? "정답!" : "오답 - 다시 보기") + "</b></div>" + ansLine + q.exp;
+    expBox.appendChild(d);
+  });
+
+  if (!sent[si]) {
+    sent[si] = true;
+    saveState();
+    engfitSubmit({
+      quizId: "basic-ib-0909-p" + (si + 1),
+      quizTitle: "임별 과거형 부정문 기초 다지기 9/9 — " + (si + 1) + "영역",
+      student: studentName,
+      score: st.score,
+      total: st.total,
+      wrong: st.wrong,
+      durationSec: elapsed[si],
+      detail: st.slice
+    });
+  }
+  show("sec-result-card");
+}
+
+/* ══════════ 오답 클리닉 ══════════ */
+function startClinic(si) {
+  clinicSec = si;
+  var st = secStats(si);
+  clinicList = st.wrong.map(function (no) { return no - 1; });
+  clinicPos = 0;
+  clinicLog = [];
+  MODE = "clinic";
+  lastTick = Date.now();
+  showWhy();
+}
+function showWhy() {
+  var idx = clinicList[clinicPos];
+  var q = ALL[idx];
+  var log = answersLog[idx];
+  document.getElementById("why-num").textContent =
+    "왜 틀렸을까?  " + (clinicPos + 1) + " / " + clinicList.length;
+  document.getElementById("why-bar").style.width = (clinicPos / clinicList.length * 100) + "%";
+  document.getElementById("whybox").innerHTML =
+    "<h2>Q" + (idx + 1) + " · 왜 틀렸을까?</h2>" +
+    '<span class="row"><span class="k">문제</span><br>' + q.q + "</span>" +
+    '<span class="row"><span class="k">내가 고른 답</span> ' + esc(plain(log ? log.chosen : "")) + "<br>" +
+    '<span class="k">정답</span> ' + esc(plain(q.answer)) + "</span>" +
+    q.exp;
+  document.getElementById("rulebox").innerHTML =
+    '<span class="h">규칙 다시 보기 — ' + q.src + "</span>" + (TIPS[q.src] || "");
+  show("clinic-why-card");
+}
+document.getElementById("why-next").addEventListener("click", function () {
+  MODE = "clinic";
+  show("clinic-card");
+  showClinicQuestion();
+});
+function showClinicQuestion() {
+  var idx = clinicList[clinicPos];
+  var cq = CLINIC[idx];
+  document.getElementById("cq-num").textContent =
+    "클리닉 문제  " + (clinicPos + 1) + " / " + clinicList.length;
+  document.getElementById("cq-bar").style.width = ((clinicPos + 0.5) / clinicList.length * 100) + "%";
+  document.getElementById("cq-src").textContent = "Q" + (idx + 1) + " 같은 개념 · " + ALL[idx].src;
+  document.getElementById("cq-text").innerHTML = cq.q;
+  var box = document.getElementById("cq-choices");
+  box.innerHTML = "";
+  document.getElementById("cq-keyhint").classList.toggle("hidden", cq.t === "ord");
+  if (cq.t === "ord") { renderOrd(cq, box); lastTick = Date.now(); window.scrollTo(0, 0); return; }
+  cq.shuffled.forEach(function (c, i) {
+    var b = document.createElement("button");
+    b.className = "choice";
+    b.innerHTML = '<span class="num">' + CIRCLED[i] + "</span>" + c;
+    b.addEventListener("click", function () { pick(c); });
+    box.appendChild(b);
+  });
+  lastTick = Date.now();
+  window.scrollTo(0, 0);
+}
+function clinicAnswer(choice) {
+  var idx = clinicList[clinicPos];
+  var cq = CLINIC[idx];
+  var ok = (cq.t === "ord") ? (ordNorm(choice) === ordNorm(cq.answer)) : (choice === cq.answer);
+  clinicLog.push({ no: idx + 1, ok: ok, chosen: choice, answer: cq.answer });
+  clinicPos++;
+  playAnswer("c" + pad2(idx + 1), cq.say, function () {
+    locked = false;
+    if (clinicPos >= clinicList.length) showClinicResult();
+    else showWhy();
+  });
+}
+function showClinicResult() {
+  MODE = "quiz";
+  var score = clinicLog.filter(function (l) { return l.ok; }).length;
+  var total = clinicLog.length;
+  document.getElementById("cr-score").textContent = score + " / " + total;
+  document.getElementById("cr-title").textContent =
+    (score === total) ? "오답 클리닉 전부 정답! 완벽해요" : "오답 클리닉 완료! 수고했어요";
+  document.getElementById("cr-msg").textContent =
+    (score === total)
+      ? "틀렸던 곳을 전부 다시 잡았어요. 이제 이 유형은 별이 것이에요!"
+      : "한 번 더 보면 확실해져요. 아래 해설을 소리 내어 읽어 보세요.";
+
+  var crCopy = document.getElementById("cr-copy-btn");
+  crCopy.textContent = "클리닉 결과 복사 (카톡용)";
+  crCopy.onclick = function () { copyText(crCopy, clinicMsg(), "복사 완료! 카톡에 붙여넣기 하세요"); };
+
+  var nextSi = firstUndoneSec();
+  var crNext = document.getElementById("cr-next-btn");
+  if (nextSi === -1) {
+    crNext.textContent = "영역 결과 화면으로 돌아가기";
+    crNext.onclick = function () { showSectionResult(clinicSec); };
+  } else {
+    crNext.textContent = "쉬었다가 " + (nextSi + 1) + "영역 개념 카드 보기";
+    crNext.onclick = function () { current = SECTIONS[nextSi].start; curSec = nextSi; lastTick = Date.now(); saveState(); step(); };
+  }
+
+  var box = document.getElementById("cr-explanations");
+  box.innerHTML = "";
+  clinicLog.forEach(function (log, i) {
+    var idx = clinicList[i];
+    var cq = CLINIC[idx];
+    var d = document.createElement("div");
+    d.className = "exp" + (log.ok ? "" : " wrong");
+    var ansLine = log.ok ? "" :
+      '<span class="ans-line">내가 고른 답: ' + esc(plain(log.chosen)) + " → 정답: " + esc(plain(cq.answer)) + "</span>";
+    d.innerHTML = '<div class="exp-head"><b>Q' + (idx + 1) + " 클리닉 " +
+      (log.ok ? "정답!" : "다시 보기") + "</b></div>" + ansLine + cq.exp;
+    box.appendChild(d);
+  });
+
+  if (!clinicSent[clinicSec]) {
+    clinicSent[clinicSec] = true;
+    saveState();
+    engfitSubmit({
+      quizId: "basic-ib-0909-p" + (clinicSec + 1) + "-clinic",
+      quizTitle: "임별 오답 클리닉 9/9 — " + (clinicSec + 1) + "영역",
+      student: studentName,
+      score: score,
+      total: total,
+      wrong: clinicLog.filter(function (l) { return !l.ok; }).map(function (l) { return l.no; }),
+      durationSec: 0,
+      detail: clinicLog
+    });
+  }
+  show("clinic-result-card");
+}
+</script>
+</body>
+</html>
